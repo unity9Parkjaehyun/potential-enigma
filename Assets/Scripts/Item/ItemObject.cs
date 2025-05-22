@@ -6,40 +6,32 @@ using UnityEngine;
 
 public enum ItemType
 {
+    Resource,
     Equipable,
-    Consumable,
-    Resource
-
+    Consumable
 }
 
+
+// 소모 아이템 사용 시 변경될 Conditions
 public enum ConsumableType
 {
-    Health,
-    Stamina
+    Hunger,
+    Health
 }
 
-
-public class ItemDataConsumable
-{
-    public ConsumableType type;
-    public float value;
-}
 [CreateAssetMenu(fileName = "Item", menuName = "New Item")]
-public class ItemObject : MonoBehaviour
+public class itemObject : ScriptableObject
 {
-    [Header("info")]
+
+    [Header("Info")]
     public string displayName;
     public string description;
     public ItemType type;
     public Sprite icon;
-    public GameObject dropPrefab;
+    public GameObject dropPerfab;
+    public itemObject item;
 
     [Header("Stacking")]
     public bool canStack;
     public int maxStackAmount;
-
-    [Header("Consumable")]
-    public ItemDataConsumable[] consumables;
-
 }
-

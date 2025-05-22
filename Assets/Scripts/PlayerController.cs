@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 curMovementInput;
     public LayerMask groundLayerMask;
+    public LayerMask interactableLayerMask; // Interactable 레이어 마스크 추가
     private bool isRunning = false;
 
     [Header("Look")]
@@ -125,9 +126,12 @@ public class PlayerController : MonoBehaviour
             new Ray(transform.position + (-transform.right * 0.2f) + (transform.up * 0.01f), Vector3.down)
         };
 
+        // Ground 레이어와 Interactable 레이어를 합친 레이어 마스크 생성
+        LayerMask combinedLayerMask = groundLayerMask | interactableLayerMask;
+
         for (int i = 0; i < rays.Length; i++)
         {
-            if (Physics.Raycast(rays[i], 2.0f, groundLayerMask))
+            if (Physics.Raycast(rays[i], 2.0f, combinedLayerMask))
             {
                 return true;
             }
