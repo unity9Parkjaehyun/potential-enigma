@@ -22,6 +22,8 @@ public class CharacterManager : MonoBehaviour
         set { _player = value; }
     }
 
+    public object Player { get; internal set; }
+
     private void Awake()
     {
         if (_instance == null)
