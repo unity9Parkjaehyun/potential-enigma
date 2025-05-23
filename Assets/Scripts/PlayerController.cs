@@ -28,10 +28,15 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _rigidbody;
     private PlayerCondition condition;
 
+    private Inventory inventory;
+    private PlayerEquipment equipment;
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         condition = GetComponent<PlayerCondition>();
+        inventory = GetComponent<Inventory>();
+        equipment = GetComponent<PlayerEquipment>();
     }
 
     void Start()
@@ -137,5 +142,53 @@ public class PlayerController : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            if (inventory != null)
+            {
+                inventory.ToggleInventory();
+            }
+        }
+    }
+
+    // E 키 - 상호작용/아이템 줍기
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            // 현재 보고 있는 오브젝트가 아이템인지 확인
+            Ray ray = cameraContainer.GetComponentInChildren<Camera>().ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, 5f, interactableLayerMask))
+            {
+                // ItemPickup 컴포넌트 확인
+                ItemPickup pickup = hit.collider.GetComponent<ItemPickup>();
+                if (pickup != null)
+                {
+                    pickup.TryPickup();
+                    return;
+                }
+
+                // 다른 상호작용 가능한 오브젝트 처리
+                // 예: 문, 스위치 등
+            }
+        }
+    }
+
+    // 마우스 왼쪽 클릭 - 공격
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            if (equipment != null)
+            {
+                equipment.Attack();
+            }
+        }
     }
 }

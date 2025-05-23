@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6daafc9c79e880e4e8e93e84ec0b64d2, type: 3}
   m_Name: Item_Knife
   m_EditorClassIdentifier: 
-  displayName: 
-  description: 
-  type: 0
-  icon: {fileID: 0}
+  displayName: "\"\uCE7C\""
+  description: "\" \uB0A0\uCE74\uB85C\uC6B4 \uCE7C \uC785\uB2C8\uB2E4. \uC694\uB9AC\uB098
+    \uC804\uD22C\uC5D0 \uC0AC\uC6A9 \uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.\""
+  type: 1
+  icon: {fileID: 21300000, guid: 4f2f320a217307a48a107491b1d17ebb, type: 3}
   dropPerfab: {fileID: 0}
-  canStack: 0
-  maxStackAmount: 0
+  item: {fileID: 11400000}
+  canStack: 1
+  maxStackAmount: 12
